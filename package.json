@@ -15,11 +15,11 @@
   ],
   "module": "dist/sdk.esm.js",
   "scripts": {
-    "lint": "tsdx lint src test",
-    "build": "tsdx build",
-    "start": "tsdx watch",
-    "test": "tsdx test",
-    "prepublishOnly": "tsdx build"
+    "lint": "npx tsdx lint src test",
+    "build": "npx tsdx build",
+    "start": "npx tsdx watch",
+    "test": "npx tsdx test",
+    "prepublishOnly": "npx tsdx build"
   },
   "dependencies": {
     "@pancakeswap-libs/pancake-swap-core": "^0.1.0",
