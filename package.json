@@ -57,6 +57,6 @@
     "singleQuote": true
   },
   "publishConfig": {
-    "@YOUR-USERNAME:registry": "https://npm.pkg.github.com"
+    "@jqebee:registry": "https://npm.pkg.github.com"
   }
 }
