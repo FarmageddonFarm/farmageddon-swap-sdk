@@ -1,5 +1,5 @@
 {
-  "name": "@pancakeswap/sdk",
+  "name": "@JQE/sdk",
   "license": "MIT",
   "version": "2.3.2",
   "description": "🛠 An SDK for building applications on top of Pancakeswap.",
@@ -8,7 +8,7 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/pancakeswap/pancakeswap-sdk.git",
+  "repository": "https://github.com/JQE/pancake-swap-sdk.git",
   "keywords": [
     "pancakeswap",
     "bsc"
@@ -57,6 +57,7 @@
     "singleQuote": true
   },
   "publishConfig": {
-    "@jqebee:registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "@JQE:registry": "https://npm.pkg.github.com"
   }
 }
