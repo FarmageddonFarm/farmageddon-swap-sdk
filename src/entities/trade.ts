@@ -139,7 +139,7 @@ export class Trade {
    * @param route route of the exact in trade
    * @param amountIn the amount being passed in
    */
-  public static exactIn(route: Route, amountIn: CurrencyAmount, factory:string): Trade {
+  public static exactIn(route: Route, amountIn: CurrencyAmount, factory = FACTORY_ADDRESS): Trade {
     return new Trade(route, amountIn, TradeType.EXACT_INPUT, factory)
   }
 
@@ -148,7 +148,7 @@ export class Trade {
    * @param route route of the exact out trade
    * @param amountOut the amount returned by the trade
    */
-  public static exactOut(route: Route, amountOut: CurrencyAmount, factory:string): Trade {
+  public static exactOut(route: Route, amountOut: CurrencyAmount, factory = FACTORY_ADDRESS): Trade {
     return new Trade(route, amountOut, TradeType.EXACT_OUTPUT, factory)
   }
 
