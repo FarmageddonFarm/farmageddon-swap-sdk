@@ -2,15 +2,15 @@
   "name": "@JQE/sdk",
   "license": "MIT",
   "version": "2.3.5",
-  "description": "🛠 An SDK for building applications on top of Pancakeswap.",
+  "description": "🛠 An SDK for building applications on top of farmageddon.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/JQE/pancake-swap-sdk.git",
+  "repository": "https://github.com/JQE/farmageddon-swap-sdk.git",
   "keywords": [
-    "pancakeswap",
+    "farmageddon",
     "bsc"
   ],
   "module": "dist/sdk.esm.js",
