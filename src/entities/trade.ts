@@ -253,11 +253,11 @@ export class Trade {
     currencyAmountIn: CurrencyAmount,
     currencyOut: Currency,
     { maxNumResults = 3, maxHops = 3 }: BestTradeOptions = {},
+    factory = FACTORY_ADDRESS,
     // used in recursion.
     currentPairs: Pair[] = [],
     originalAmountIn: CurrencyAmount = currencyAmountIn,
     bestTrades: Trade[] = [],
-    factory = FACTORY_ADDRESS
   ): Trade[] {
     invariant(pairs.length > 0, 'PAIRS')
     invariant(maxHops > 0, 'MAX_HOPS')
@@ -313,10 +313,10 @@ export class Trade {
             maxNumResults,
             maxHops: maxHops - 1
           },
+          factory,
           [...currentPairs, pair],
           originalAmountIn,
           bestTrades,
-          factory
         )
       }
     }
@@ -344,11 +344,11 @@ export class Trade {
     currencyIn: Currency,
     currencyAmountOut: CurrencyAmount,
     { maxNumResults = 3, maxHops = 3 }: BestTradeOptions = {},
+    factory = FACTORY_ADDRESS,
     // used in recursion.
     currentPairs: Pair[] = [],
     originalAmountOut: CurrencyAmount = currencyAmountOut,
     bestTrades: Trade[] = [],
-    factory = FACTORY_ADDRESS
   ): Trade[] {
     invariant(pairs.length > 0, 'PAIRS')
     invariant(maxHops > 0, 'MAX_HOPS')
@@ -404,10 +404,10 @@ export class Trade {
             maxNumResults,
             maxHops: maxHops - 1
           },
+          factory,
           [pair, ...currentPairs],
           originalAmountOut,
           bestTrades,
-          factory
         )
       }
     }
