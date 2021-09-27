@@ -16,6 +16,7 @@ import {
   FEES_DENOMINATOR,
   ChainId,
   FACTORY_ADDRESS,
+  CORGI_CODE_HASH,
 } from '../constants'
 import { sqrt, parseBigintIsh } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
@@ -38,7 +39,7 @@ export class Pair {
           [tokens[1].address]: getCreate2Address(
             factory,
             keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-            INIT_CODE_HASH
+            factory === FACTORY_ADDRESS ? INIT_CODE_HASH : CORGI_CODE_HASH
           ),
         },
       }
