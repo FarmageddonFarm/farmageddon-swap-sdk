@@ -16,9 +16,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@JQE/sdk@workspace:.":
+"@FarmageddonFarm/sdk@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@JQE/sdk@workspace:."
+  resolution: "@FarmageddonFarm/sdk@workspace:."
   dependencies:
     "@ethersproject/address": ^5.0.2
     "@ethersproject/contracts": ^5.0.2
