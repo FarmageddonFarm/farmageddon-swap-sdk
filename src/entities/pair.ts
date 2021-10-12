@@ -16,7 +16,6 @@ import {
   FEES_DENOMINATOR,
   ChainId,
   FACTORY_ADDRESS,
-  CORGI_CODE_HASH,
   DONK_CODE_HASH,
 } from '../constants'
 import { sqrt, parseBigintIsh } from '../utils'
