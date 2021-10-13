@@ -7,7 +7,6 @@ import { getCreate2Address } from '@ethersproject/address'
 
 import {
   BigintIsh,
-  INIT_CODE_HASH,
   MINIMUM_LIQUIDITY,
   ZERO,
   ONE,
@@ -16,9 +15,8 @@ import {
   FEES_DENOMINATOR,
   ChainId,
   FACTORY_ADDRESS,
-  DONK_CODE_HASH,
 } from '../constants'
-import { sqrt, parseBigintIsh } from '../utils'
+import { sqrt, parseBigintIsh, getInitHash } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
 import { Token } from './token'
 
@@ -32,6 +30,7 @@ export class Pair {
     const tokens = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
 
     if (PAIR_ADDRESS_CACHE?.[factory]?.[tokens[0].address]?.[tokens[1].address] === undefined) {
+      const codeHash = getInitHash(factory);
       PAIR_ADDRESS_CACHE = {
         ...PAIR_ADDRESS_CACHE,
         [factory]: {
@@ -40,7 +39,7 @@ export class Pair {
             [tokens[1].address]: getCreate2Address(
               factory,
               keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-              factory === FACTORY_ADDRESS ? INIT_CODE_HASH : DONK_CODE_HASH
+              codeHash
             ),
           },
         },
