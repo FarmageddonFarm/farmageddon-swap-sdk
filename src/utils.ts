@@ -3,7 +3,7 @@ import warning from 'tiny-warning'
 import JSBI from 'jsbi'
 import { getAddress } from '@ethersproject/address'
 
-import { BigintIsh, ZERO, ONE, TWO, THREE, SolidityType, SOLIDITY_TYPE_MAXIMA, FACTORY_DONK, DONK_CODE_HASH, FACTORY_BABY, BABY_CODE_HASH, APE_CODE_HASH, FACTORY_APE } from './constants'
+import { BigintIsh, ZERO, ONE, TWO, THREE, SolidityType, SOLIDITY_TYPE_MAXIMA, FACTORY_DONK, DONK_CODE_HASH, FACTORY_BABY, BABY_CODE_HASH, APE_CODE_HASH, FACTORY_APE, FACTORY_GUITAR, GUITAR_CODE_HASH } from './constants'
 import { FACTORY_ADDRESS, INIT_CODE_HASH } from '.'
 
 export function validateSolidityTypeInstance(value: JSBI, solidityType: SolidityType): void {
@@ -90,6 +90,8 @@ export function getInitHash(factory: string): string {
       return BABY_CODE_HASH;
     case FACTORY_APE:
       return APE_CODE_HASH;
+    case FACTORY_GUITAR:
+      return GUITAR_CODE_HASH;
     case FACTORY_ADDRESS:
     default:
       return INIT_CODE_HASH;
