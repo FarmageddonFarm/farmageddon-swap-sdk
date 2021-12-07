@@ -1,7 +1,7 @@
 {
   "name": "@FarmageddonFarm/sdk",
   "license": "MIT",
-  "version": "2.3.15",
+  "version": "2.3.16",
   "description": "🛠 An SDK for building applications on top of farmageddon.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
