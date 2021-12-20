@@ -31,6 +31,7 @@ export class Pair {
 
     if (PAIR_ADDRESS_CACHE?.[factory]?.[tokens[0].address]?.[tokens[1].address] === undefined) {
       const codeHash = getInitHash(factory);
+      console.log(codeHash);
       PAIR_ADDRESS_CACHE = {
         ...PAIR_ADDRESS_CACHE,
         [factory]: {
