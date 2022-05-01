@@ -84,6 +84,8 @@ export function sortedInsert<T>(items: T[], add: T, maxSize: number, comparator:
 
 export function getInitHash(factory: string): string {
   switch(factory) {
+    case FACTORY_FARM:
+      return FARM_CODE_HASH;
     case FACTORY_YUKLA:
       return YUKLA_CODE_HASH;
     case FACTORY_DONK:
