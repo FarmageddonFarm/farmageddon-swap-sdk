@@ -2,9 +2,9 @@ import JSBI from 'jsbi'
 
 // exports for external consumption
 export type BigintIsh = JSBI | bigint | string
-
+// cic mainnet = 1353
 export enum ChainId {
-  MAINNET = 1353,
+  MAINNET = 97,  // testing on bsc testnet
   TESTNET = 1252
 }
 
@@ -19,11 +19,11 @@ export enum Rounding {
   ROUND_UP
 }
 
-export const FACTORY_ADDRESS = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73'
+export const FACTORY_ADDRESS = '0x62Fec415b62D43FE8f8c336824071A20b6B9Ae0F'
 // export const FACTORY_FARM = '0xEE638aa41e12b6C6df71F88410eB1dDD2Fb28973';
 
 
-export const INIT_CODE_HASH = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
+export const INIT_CODE_HASH = '0x5911c21629e2f56866bafbc289fa01906dbe8d78458989120ed0ac547efb55a5'
 // export const FARM_CODE_HASH = '0x5efdbad5ed4aa46355ae749659666584cf3bf0f5ea5a7e32b05f2d35f074746f';
 
 
@@ -37,7 +37,7 @@ export const THREE = JSBI.BigInt(3)
 export const FIVE = JSBI.BigInt(5)
 export const TEN = JSBI.BigInt(10)
 export const _100 = JSBI.BigInt(100)
-export const FEES_NUMERATOR = JSBI.BigInt(9975)
+export const FEES_NUMERATOR = JSBI.BigInt(9985)
 export const FEES_DENOMINATOR = JSBI.BigInt(10000)
 
 export enum SolidityType {

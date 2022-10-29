@@ -11,7 +11,7 @@ import { Token } from './entities/token'
 
 let TOKEN_DECIMALS_CACHE: { [chainId: number]: { [address: string]: number } } = {
   [ChainId.MAINNET]: {
-    '0xE0B7927c4aF23765Cb51314A0E0521A9645F0E2A': 9 // DGD
+    '0x5CdDC17F39222B6C9ED3D27E09C297DaA55EB17E': 9 // DGD
   }
 }
 
