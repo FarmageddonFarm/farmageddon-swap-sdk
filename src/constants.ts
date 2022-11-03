@@ -2,10 +2,10 @@ import JSBI from 'jsbi'
 
 // exports for external consumption
 export type BigintIsh = JSBI | bigint | string
-// cic mainnet = 1353
+
 export enum ChainId {
-  MAINNET = 97,  // testing on bsc testnet
-  TESTNET = 1252
+  MAINNET = 1353,
+  TESTNET = 97 // BSC Testnet
 }
 
 export enum TradeType {
