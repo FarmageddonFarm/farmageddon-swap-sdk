@@ -64,5 +64,5 @@ export const WETH = {
     'WCIC',
     'Wrapped CIC'
   ),
-  [ChainId.TESTNET]: new Token(ChainId.TESTNET, '0x4130A6f00bb48ABBcAA8B7a04D00Ab29504AD9dA', 18, 'WCIC', 'Wrapped CIC')
+  [ChainId.TESTNET]: new Token(ChainId.TESTNET, '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd', 18, 'WCIC', 'Wrapped CIC')
 }
