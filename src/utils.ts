@@ -4,9 +4,9 @@ import JSBI from 'jsbi'
 import { getAddress } from '@ethersproject/address'
 
 // import { BigintIsh, ZERO, ONE, TWO, THREE, SolidityType, SOLIDITY_TYPE_MAXIMA,FACTORY_FARM, FARM_CODE_HASH, FACTORY_DONK, DONK_CODE_HASH, FACTORY_BABY, BABY_CODE_HASH, APE_CODE_HASH, FACTORY_APE, FACTORY_GUITAR, GUITAR_CODE_HASH, FACTORY_AUTOSHARK, AUTOSHARK_CODE_HASH, FACTORY_BISWAP, BISWAP_CODE_HASH, FACTORY_YUKLA, YUKLA_CODE_HASH } from './constants'
-import { BigintIsh, ZERO, ONE, TWO, THREE, SolidityType, SOLIDITY_TYPE_MAXIMA, FACTORY_WENDEX, WENDEX_CODE_HASH, FACTORY_FARMOLD ,FARMOLD_CODE_HASH } from './constants'
+import { BigintIsh, ZERO, ONE, TWO, THREE, SolidityType, SOLIDITY_TYPE_MAXIMA /*, FACTORY_WENDEX, WENDEX_CODE_HASH, FACTORY_FARMOLD ,FARMOLD_CODE_HASH */} from './constants'
 
-import { FACTORY_ADDRESS, INIT_CODE_HASH } from '.'
+// import { FACTORY_ADDRESS, INIT_CODE_HASH } from '.'
 
 export function validateSolidityTypeInstance(value: JSBI, solidityType: SolidityType): void {
   invariant(JSBI.greaterThanOrEqual(value, ZERO), `${value} is not a ${solidityType}.`)
@@ -85,7 +85,7 @@ export function sortedInsert<T>(items: T[], add: T, maxSize: number, comparator:
 }
 
 
-export function getInitHash(factory: string): string {
+/* export function getInitHash(factory: string): string {
   switch(factory) {
     case FACTORY_WENDEX:
       return WENDEX_CODE_HASH;
@@ -95,7 +95,7 @@ export function getInitHash(factory: string): string {
     default:
       return INIT_CODE_HASH;
   }
-}
+} */
 
 
 
