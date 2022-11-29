@@ -296,8 +296,7 @@ export class Trade {
             new Route([...currentPairs, pair], originalAmountIn.currency, currencyOut),
             originalAmountIn,
             TradeType.EXACT_INPUT,
-            dex.factory,
-            dex.codeHash
+            dex
           ),
           maxNumResults,
           tradeComparator
@@ -314,8 +313,7 @@ export class Trade {
             maxNumResults,
             maxHops: maxHops - 1
           },
-          dex.factory,
-          dex.codeHash,
+          dex,
           [...currentPairs, pair],
           originalAmountIn,
           bestTrades,
@@ -373,7 +371,7 @@ export class Trade {
 
       let amountIn: TokenAmount
       try {
-        ;[amountIn] = pair.getInputAmount(amountOut, factory, codeHash)
+        ;[amountIn] = pair.getInputAmount(amountOut, dex.factory, dex.codeHash)
       } catch (error) {
         // not enough liquidity in this pair
         if ((error as InsufficientReservesError).isInsufficientReservesError) {
@@ -389,8 +387,7 @@ export class Trade {
             new Route([pair, ...currentPairs], currencyIn, originalAmountOut.currency),
             originalAmountOut,
             TradeType.EXACT_OUTPUT,
-            dex.factory,
-            dex.codeHash
+            dex
           ),
           maxNumResults,
           tradeComparator
@@ -407,8 +404,7 @@ export class Trade {
             maxNumResults,
             maxHops: maxHops - 1
           },
-          dex.factory,
-          dex.codeHash,
+          dex,
           [pair, ...currentPairs],
           originalAmountOut,
           bestTrades,
