@@ -11,7 +11,7 @@ import {
   ZERO,
   ONE,
   FIVE,
-  FEES_NUMERATOR,
+  Dex,
   FEES_DENOMINATOR,
   ChainId,
 } from '../constants'
@@ -25,38 +25,38 @@ export class Pair {
   public readonly liquidityToken: Token
   private readonly tokenAmounts: [TokenAmount, TokenAmount]
 
-  public static getAddress(tokenA: Token, tokenB: Token, factory: string, codeHash: string): string {
+  public static getAddress(tokenA: Token, tokenB: Token, dex: Dex): string {
     const tokens = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
 
-    if (PAIR_ADDRESS_CACHE?.[factory]?.[tokens[0].address]?.[tokens[1].address] === undefined) {
+    if (PAIR_ADDRESS_CACHE?.[dex.factory]?.[tokens[0].address]?.[tokens[1].address] === undefined) {
       
       PAIR_ADDRESS_CACHE = {
         ...PAIR_ADDRESS_CACHE,
-        [factory]: {
+        [dex.factory]: {
           [tokens[0].address]: {
-            ...PAIR_ADDRESS_CACHE?.[factory]?.[tokens[0].address],
+            ...PAIR_ADDRESS_CACHE?.[dex.factory]?.[tokens[0].address],
             [tokens[1].address]: getCreate2Address(
-              factory,
+              dex.factory,
               keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-              codeHash
+              dex.codeHash
             ),
           },
         },
       }
     }
-    return PAIR_ADDRESS_CACHE[factory][tokens[0].address][tokens[1].address]
+    return PAIR_ADDRESS_CACHE[dex.factory][tokens[0].address][tokens[1].address]
   }
 
-  public constructor(tokenAmountA: TokenAmount, tokenAmountB: TokenAmount, factory: string, codeHash: string) {
+  public constructor(tokenAmountA: TokenAmount, tokenAmountB: TokenAmount, dex: Dex) {
     const tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
       ? [tokenAmountA, tokenAmountB]
       : [tokenAmountB, tokenAmountA]
     this.liquidityToken = new Token(
       tokenAmounts[0].token.chainId,
-      Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token, factory, codeHash),
+      Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token, dex.factory, dex.codeHash),
       18,
-      'Cake-LP',
-      'Pancake LPs'
+      dex.lpname,
+      dex.name
     )
     this.tokenAmounts = tokenAmounts as [TokenAmount, TokenAmount]
   }
@@ -120,14 +120,14 @@ export class Pair {
     return token.equals(this.token0) ? this.reserve0 : this.reserve1
   }
 
-  public getOutputAmount(inputAmount: TokenAmount, factory: string, codeHash: string): [TokenAmount, Pair] {
+  public getOutputAmount(inputAmount: TokenAmount, dex: Dex): [TokenAmount, Pair] {
     invariant(this.involvesToken(inputAmount.token), 'TOKEN')
     if (JSBI.equal(this.reserve0.raw, ZERO) || JSBI.equal(this.reserve1.raw, ZERO)) {
       throw new InsufficientReservesError()
     }
     const inputReserve = this.reserveOf(inputAmount.token)
     const outputReserve = this.reserveOf(inputAmount.token.equals(this.token0) ? this.token1 : this.token0)
-    const inputAmountWithFee = JSBI.multiply(inputAmount.raw, FEES_NUMERATOR)
+    const inputAmountWithFee = JSBI.multiply(inputAmount.raw, dex.numerator)
     const numerator = JSBI.multiply(inputAmountWithFee, outputReserve.raw)
     const denominator = JSBI.add(JSBI.multiply(inputReserve.raw, FEES_DENOMINATOR), inputAmountWithFee)
     const outputAmount = new TokenAmount(
@@ -137,10 +137,10 @@ export class Pair {
     if (JSBI.equal(outputAmount.raw, ZERO)) {
       throw new InsufficientInputAmountError()
     }
-    return [outputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), factory, codeHash)]
+    return [outputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), dex.factory, dex.codeHash)]
   }
 
-  public getInputAmount(outputAmount: TokenAmount, factory: string, codeHash: string): [TokenAmount, Pair] {
+  public getInputAmount(outputAmount: TokenAmount, dex: Dex): [TokenAmount, Pair] {
     invariant(this.involvesToken(outputAmount.token), 'TOKEN')
     if (
       JSBI.equal(this.reserve0.raw, ZERO) ||
@@ -153,12 +153,12 @@ export class Pair {
     const outputReserve = this.reserveOf(outputAmount.token)
     const inputReserve = this.reserveOf(outputAmount.token.equals(this.token0) ? this.token1 : this.token0)
     const numerator = JSBI.multiply(JSBI.multiply(inputReserve.raw, outputAmount.raw), FEES_DENOMINATOR)
-    const denominator = JSBI.multiply(JSBI.subtract(outputReserve.raw, outputAmount.raw), FEES_NUMERATOR)
+    const denominator = JSBI.multiply(JSBI.subtract(outputReserve.raw, outputAmount.raw), dex.numerator)
     const inputAmount = new TokenAmount(
       outputAmount.token.equals(this.token0) ? this.token1 : this.token0,
       JSBI.add(JSBI.divide(numerator, denominator), ONE)
     )
-    return [inputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), factory, codeHash)]
+    return [inputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), dex.factory, dex.codeHash)]
   }
 
   public getLiquidityMinted(

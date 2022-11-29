@@ -9,6 +9,20 @@ export enum ChainId {
   TESTNET = 97 // BSC Testnet
 }
 
+
+export interface Dex {
+  id: string
+  name: string
+  lpname: string
+  router: Address
+  factory: Address
+  dexABI: any
+  allowTrade: boolean
+  factoryBase: Token
+  codeHash: string
+  numerator: string
+}
+
 export enum TradeType {
   EXACT_INPUT,
   EXACT_OUTPUT
@@ -38,7 +52,7 @@ export const THREE = JSBI.BigInt(3)
 export const FIVE = JSBI.BigInt(5)
 export const TEN = JSBI.BigInt(10)
 export const _100 = JSBI.BigInt(100)
-export const FEES_NUMERATOR = JSBI.BigInt(9985)
+// export const FEES_NUMERATOR = JSBI.BigInt(9985)
 export const FEES_DENOMINATOR = JSBI.BigInt(10000)
 
 export enum SolidityType {
