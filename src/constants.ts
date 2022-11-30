@@ -1,5 +1,6 @@
 import JSBI from 'jsbi'
 
+
 // exports for external consumption
 export type BigintIsh = JSBI | bigint | string
 
@@ -9,18 +10,19 @@ export enum ChainId {
   TESTNET = 97 // BSC Testnet
 }
 
+export interface Address {
+  1353?: string
+  1252?: string
+  97?: string
+}
 
-export interface Dex {
-  id: string
+
+export interface FactoryInfo {
   name: string
   lpname: string
-  router: Address
-  factory: Address
-  dexABI: any
-  allowTrade: boolean
-  factoryBase: Token
+  factory: string
   codeHash: string
-  numerator: string
+  numerator: number
 }
 
 export enum TradeType {
