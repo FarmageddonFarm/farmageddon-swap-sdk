@@ -10,12 +10,6 @@ export enum ChainId {
   TESTNET = 97 // BSC Testnet
 }
 
-export interface Address {
-  1353?: string
-  1252?: string
-  97?: string
-}
-
 
 export interface FactoryInfo {
   name: string
