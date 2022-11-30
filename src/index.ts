@@ -6,7 +6,8 @@ export {
   ChainId,
   TradeType,
   Rounding,
-  MINIMUM_LIQUIDITY
+  MINIMUM_LIQUIDITY,
+  FactoryInfo
 } from './constants'
 
 export * from './errors'
