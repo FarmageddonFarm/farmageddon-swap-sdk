@@ -1,6 +1,6 @@
 import { TradeType } from './constants'
 import invariant from 'tiny-invariant'
-import { parseBigintIsh, validateAndParseAddress } from './utils'
+import {  validateAndParseAddress } from './utils'
 import { CurrencyAmount, ETHER, Percent, Trade } from './entities'
 import JSBI from 'jsbi'
 
@@ -92,9 +92,10 @@ export abstract class Router {
         : `0x${options.deadline.toString(16)}`
 
     const useFeeOnTransfer = Boolean(options.feeOnTransfer)
+
     
-    const amountInBig = parseBigintIsh(amountIn.substring(2));
-    const bigFee = parseBigintIsh(fee.substring(2));
+    const amountInBig = JSBI.BigInt(JSBI.BigInt(amountIn).toString(10));
+    const bigFee = JSBI.BigInt(JSBI.BigInt(fee).toString(10));
     const amountInFee = `0x${JSBI.add(amountInBig, bigFee).toString(16)}`;
 
 
