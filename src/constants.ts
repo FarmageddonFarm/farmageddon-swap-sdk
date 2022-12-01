@@ -1,5 +1,6 @@
 import JSBI from 'jsbi'
 
+
 // exports for external consumption
 export type BigintIsh = JSBI | bigint | string
 
@@ -7,6 +8,15 @@ export enum ChainId {
   BSCNET = 56,
   CICNET = 1353,
   TESTNET = 97 // BSC Testnet
+}
+
+
+export interface FactoryInfo {
+  name: string
+  lpname: string
+  factory: string
+  codeHash: string
+  numerator: number
 }
 
 export enum TradeType {
@@ -38,7 +48,7 @@ export const THREE = JSBI.BigInt(3)
 export const FIVE = JSBI.BigInt(5)
 export const TEN = JSBI.BigInt(10)
 export const _100 = JSBI.BigInt(100)
-export const FEES_NUMERATOR = JSBI.BigInt(9985)
+// export const FEES_NUMERATOR = JSBI.BigInt(9985)
 export const FEES_DENOMINATOR = JSBI.BigInt(10000)
 
 export enum SolidityType {

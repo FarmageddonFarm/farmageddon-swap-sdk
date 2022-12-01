@@ -1,6 +1,6 @@
 import { TradeType } from './constants'
 import invariant from 'tiny-invariant'
-import { parseBigintIsh, validateAndParseAddress } from './utils'
+import {  validateAndParseAddress } from './utils'
 import { CurrencyAmount, ETHER, Percent, Trade } from './entities'
 import JSBI from 'jsbi'
 
@@ -74,8 +74,8 @@ export abstract class Router {
    * @param trade to produce call parameters for
    * @param options options for the call parameters
    */
-  public static swapCallParameters(trade: Trade, options: TradeOptions | TradeOptionsDeadline, flatFee?: number): SwapParameters {
-    const fee = flatFee === undefined ? ZERO_HEX : `0x${flatFee.toString(16)}`
+  public static swapCallParameters(trade: Trade, options: TradeOptions | TradeOptionsDeadline, flatFee?: string): SwapParameters {
+    const fee = flatFee === undefined ? ZERO_HEX : flatFee
     const etherIn = trade.inputAmount.currency === ETHER
     const etherOut = trade.outputAmount.currency === ETHER
     // the router does not support both ether in and out
@@ -92,9 +92,10 @@ export abstract class Router {
         : `0x${options.deadline.toString(16)}`
 
     const useFeeOnTransfer = Boolean(options.feeOnTransfer)
+
     
-    const amountInBig = parseBigintIsh(amountIn.substring(2));
-    const bigFee = parseBigintIsh(fee.substring(2));
+    const amountInBig = JSBI.BigInt(JSBI.BigInt(amountIn).toString(10));
+    const bigFee = JSBI.BigInt(JSBI.BigInt(fee).toString(10));
     const amountInFee = `0x${JSBI.add(amountInBig, bigFee).toString(16)}`;
 
 
