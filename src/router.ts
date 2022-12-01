@@ -74,8 +74,8 @@ export abstract class Router {
    * @param trade to produce call parameters for
    * @param options options for the call parameters
    */
-  public static swapCallParameters(trade: Trade, options: TradeOptions | TradeOptionsDeadline, flatFee?: number): SwapParameters {
-    const fee = flatFee === undefined ? ZERO_HEX : `0x${flatFee.toString(16)}`
+  public static swapCallParameters(trade: Trade, options: TradeOptions | TradeOptionsDeadline, flatFee?: string): SwapParameters {
+    const fee = flatFee === undefined ? ZERO_HEX : flatFee
     const etherIn = trade.inputAmount.currency === ETHER
     const etherOut = trade.outputAmount.currency === ETHER
     // the router does not support both ether in and out
