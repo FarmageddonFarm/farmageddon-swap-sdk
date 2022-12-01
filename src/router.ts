@@ -2,7 +2,7 @@ import { TradeType } from './constants'
 import invariant from 'tiny-invariant'
 import {  validateAndParseAddress } from './utils'
 import { CurrencyAmount, ETHER, Percent, Trade } from './entities'
-import JSBI from 'jsbi'
+// import JSBI from 'jsbi'
 
 /**
  * Options for producing the arguments to send call to the router.
@@ -94,9 +94,9 @@ export abstract class Router {
     const useFeeOnTransfer = Boolean(options.feeOnTransfer)
 
     
-    const amountInBig = JSBI.BigInt(JSBI.BigInt(amountIn).toString(10));
-    const bigFee = JSBI.BigInt(JSBI.BigInt(fee).toString(10));
-    const amountInFee = `0x${JSBI.add(amountInBig, bigFee).toString(16)}`;
+    // const amountInBig = JSBI.BigInt(JSBI.BigInt(amountIn).toString(10));
+    // const bigFee = JSBI.BigInt(JSBI.BigInt(fee).toString(10));
+    // const amountInFee = `0x${JSBI.add(amountInBig, bigFee).toString(16)}`;
 
 
     let methodName: string
@@ -108,7 +108,7 @@ export abstract class Router {
           methodName = useFeeOnTransfer ? 'swapExactETHForTokensSupportingFeeOnTransferTokens' : 'swapExactETHForTokens'
           // (uint amountOutMin, address[] calldata path, address to, uint deadline)
           args = [amountOut, path, to, deadline]
-          value = amountInFee
+          value = amountIn
         } else if (etherOut) {
           methodName = useFeeOnTransfer ? 'swapExactTokensForETHSupportingFeeOnTransferTokens' : 'swapExactTokensForETH'
           // (uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
@@ -129,7 +129,7 @@ export abstract class Router {
           methodName = 'swapETHForExactTokens'
           // (uint amountOut, address[] calldata path, address to, uint deadline)
           args = [amountOut, path, to, deadline]
-          value = amountInFee
+          value = amountIn
         } else if (etherOut) {
           methodName = 'swapTokensForExactETH'
           // (uint amountOut, uint amountInMax, address[] calldata path, address to, uint deadline)
