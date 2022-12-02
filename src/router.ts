@@ -75,7 +75,7 @@ export abstract class Router {
    * @param options options for the call parameters
    */
   public static swapCallParameters(trade: Trade, options: TradeOptions | TradeOptionsDeadline, flatFee?: number): SwapParameters {
-    const fee = flatFee === undefined ? ZERO_HEX : `0x${flatFee.toString(16)}`
+    
     const etherIn = trade.inputAmount.currency === ETHER
     const etherOut = trade.outputAmount.currency === ETHER
     // the router does not support both ether in and out
@@ -92,7 +92,8 @@ export abstract class Router {
         : `0x${options.deadline.toString(16)}`
 
     const useFeeOnTransfer = Boolean(options.feeOnTransfer)
-
+    const feeTimesPath = flatFee ? flatFee * (path.length -1) : 0
+    const fee = flatFee === undefined ? ZERO_HEX : `0x${feeTimesPath.toString(16)}`
     
     // const amountInBig = JSBI.BigInt(JSBI.BigInt(amountIn).toString(10));
     // const bigFee = JSBI.BigInt(JSBI.BigInt(fee).toString(10));
