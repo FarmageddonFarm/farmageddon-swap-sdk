@@ -59,6 +59,5 @@
   "publishConfig": {
     "access": "public",
     "@FarmageddonFarm:registry": "https://npm.pkg.github.com"
-  },
-  "packageManager": "yarn@2.4.3"
+  }
 }
