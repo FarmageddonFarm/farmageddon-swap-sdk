@@ -95,11 +95,6 @@ export abstract class Router {
     const feeTimesPath = flatFee ? flatFee * (path.length -1) : 0
     const fee = flatFee === undefined ? ZERO_HEX : `0x${feeTimesPath.toString(16)}`
     
-    // const amountInBig = JSBI.BigInt(JSBI.BigInt(amountIn).toString(10));
-    // const bigFee = JSBI.BigInt(JSBI.BigInt(fee).toString(10));
-    // const amountInFee = `0x${JSBI.add(amountInBig, bigFee).toString(16)}`;
-
-
     let methodName: string
     let args: (string | string[])[]
     let value: string
